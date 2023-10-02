@@ -1,7 +1,7 @@
 resources:
   - ../../iac/kubernetes/base
 
-namespace: hes-extensions
+namespace: default
 namePrefix: app2-
 
 images:
