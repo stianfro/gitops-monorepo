@@ -29,3 +29,14 @@ patches:
             env:
             - name: ENVIRONMENT
               value: production
+            ports:
+            - containerPort: 4000
+- patch: |
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: service
+    spec:
+      ports:
+      - port: 4000
+        targetPort: 4000
