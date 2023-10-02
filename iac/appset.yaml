@@ -14,6 +14,7 @@ spec:
   template:
     metadata:
       name: '{{path.basename}}'
+      namespace: example # '{{path.basename}}'
     spec:
       project: "default"
       syncPolicy:
