@@ -1,0 +1,41 @@
+resources:
+  - ../../iac/kubernetes/base
+  - gitops/ingress.yaml
+
+namespace: example
+namePrefix: app4-
+
+images:
+- name: registry.example.io
+  newName: ghcr.io/nkzk/example-go-image
+  newTag: release
+
+labels:
+- pairs:
+    app: app4
+  includeSelectors: true
+
+patches:
+- patch: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: deployment
+    spec:
+      template:
+        spec:
+          containers:
+          - name: app
+            resources:
+              limits:
+                memory: "2Gi"
+                cpu: "50m"
+- patch: |
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: service
+    spec:
+      ports:
+      - port: 4000
+        targetPort: 4000
