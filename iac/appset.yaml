@@ -1,0 +1,24 @@
+# alt under src/<appname>
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: example-appset
+  namespace: openshift-gitops
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/stianfro/gitops-monorepo.git
+      revision: HEAD
+      directories:
+      - path: src/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: "example"
+      source:
+        repoURL: https://github.com/stianfro/gitops-monorepo.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc

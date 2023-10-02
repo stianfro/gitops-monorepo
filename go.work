@@ -1,0 +1,6 @@
+go 1.21.1
+
+use (
+	./src/app1
+	./src/app2
+)

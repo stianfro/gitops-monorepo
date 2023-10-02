@@ -1,0 +1,30 @@
+resources:
+  - ../../iac/kubernetes/base
+
+namespace: hes-extensions
+namePrefix: app1-
+
+images:
+- name: registry.example.io
+  newName: ghcr.io/nkzk/example-go-image
+  newTag: release
+
+labels:
+- pairs:
+    app: app1
+  includeSelectors: true
+
+patches:
+- patch: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: deployment
+    spec:
+      template:
+        spec:
+          containers:
+          - name: app
+            env:
+            - name: ENVIRONMENT
+              value: production
