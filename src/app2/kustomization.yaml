@@ -1,7 +1,8 @@
 resources:
   - ../../iac/kubernetes/base
+  - gitops/ingress.yaml
 
-namespace: default
+namespace: example
 namePrefix: app2-
 
 images:
@@ -29,3 +30,12 @@ patches:
               limits:
                 memory: "2Gi"
                 cpu: "50m"
+- patch: |
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: service
+    spec:
+      ports:
+      - port: 4000
+        targetPort: 4000
