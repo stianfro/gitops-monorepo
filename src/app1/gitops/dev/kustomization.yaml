@@ -1,9 +1,10 @@
 resources:
-  - ../../iac/kubernetes/base
-  - gitops/ingress.yaml
+  - ../../../../iac/kubernetes/base
+  - ingress.yaml
 
-namespace: example
-namePrefix: app4-
+namespace: example-dev
+namePrefix: app1-
+nameSuffix: -dev
 
 images:
 - name: registry.example.io
@@ -12,7 +13,7 @@ images:
 
 labels:
 - pairs:
-    app: app4
+    app: app1
   includeSelectors: true
 
 patches:
@@ -26,10 +27,11 @@ patches:
         spec:
           containers:
           - name: app
-            resources:
-              limits:
-                memory: "2Gi"
-                cpu: "50m"
+            env:
+            - name: ENVIRONMENT
+              value: development
+            ports:
+            - containerPort: 4000
 - patch: |
     apiVersion: v1
     kind: Service

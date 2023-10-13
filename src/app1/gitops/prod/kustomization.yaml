@@ -1,9 +1,10 @@
 resources:
-  - ../../iac/kubernetes/base
+  - ../../../iac/kubernetes/base
   - gitops/ingress.yaml
 
-namespace: example
+namespace: example-prod
 namePrefix: app1-
+nameSuffix: -prod
 
 images:
 - name: registry.example.io

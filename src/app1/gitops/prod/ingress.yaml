@@ -4,7 +4,7 @@ metadata:
   name: ingress
 spec:
   rules:
-  - host: app3.localhost
+  - host: app1-prod.localhost
     http:
       paths:
       - backend:
